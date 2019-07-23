@@ -71,7 +71,7 @@ create_bcgov_project <- function(path = ".", rmarkdown = TRUE,
     usethis::use_description()
     usethis::use_namespace()
     usethis::use_build_ignore(c("analysis", "^CODE_OF_CONDUCT.md$", "^CONTRIBUTING.md$","^.*\\.Rproj$", "\\.Rproj\\.user$", "^README\\.Rmd$"))
-    default_str <- "compendium"
+    default_str <- FALSE
   }  else {
     default_str <- FALSE
   # Catch the case when dir_struct == ""
@@ -81,12 +81,12 @@ create_bcgov_project <- function(path = ".", rmarkdown = TRUE,
   files <- setdiff(file.path(path_norm, dir_struct), dirs)
   filedirs <- dirname(files)
   
-  ## This confuses me a little. In line 59 we create the project. 
-  # if (any(file.exists(files, dirs))) { ## file.exists is case-insensitive
-  #   stop("It looks as though you already have a project set up here!
-  #        If you want to add the required GitHub files, call use_bcgov_req()", 
-  #        call. = FALSE)
-  # }
+  # This confuses me a little. In line 59 we create the project.
+  if (any(file.exists(files, dirs))) { ## file.exists is case-insensitive
+    stop("It looks as though you already have a project set up here!
+         If you want to add the required GitHub files, call use_bcgov_req()",
+         call. = FALSE)
+  }
   
   ## Add the necessary R files and directories
   done("Creating new project")
