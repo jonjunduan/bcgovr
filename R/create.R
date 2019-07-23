@@ -64,7 +64,15 @@ create_bcgov_project <- function(path = ".", rmarkdown = TRUE,
   if (is.null(dir_struct)) {
     dir_struct <- c("out/", "data/", "01_load.R", "02_clean.R","03_analysis.R", "04_output.R", "run_all.R")
     default_str <- TRUE
-  } else {
+  }
+  
+  if (dir_struct == "compendium"){
+    dir_struct <- c("analysis/", "R/")
+    usethis::use_description()
+    usethis::use_namespace()
+    usethis::use_build_ignore(c("analysis", "^CODE_OF_CONDUCT.md$", "^CONTRIBUTING.md$","^.*\\.Rproj$", "\\.Rproj\\.user$", "^README\\.Rmd$"))
+    default_str <- "compendium"
+  }  else {
     default_str <- FALSE
   # Catch the case when dir_struct == ""
     if (!nzchar(dir_struct)) dir_struct <- character(0)
@@ -73,11 +81,12 @@ create_bcgov_project <- function(path = ".", rmarkdown = TRUE,
   files <- setdiff(file.path(path_norm, dir_struct), dirs)
   filedirs <- dirname(files)
   
-  if (any(file.exists(files, dirs))) { ## file.exists is case-insensitive
-    stop("It looks as though you already have a project set up here!
-         If you want to add the required GitHub files, call use_bcgov_req()", 
-         call. = FALSE)
-  }
+  ## This confuses me a little. In line 59 we create the project. 
+  # if (any(file.exists(files, dirs))) { ## file.exists is case-insensitive
+  #   stop("It looks as though you already have a project set up here!
+  #        If you want to add the required GitHub files, call use_bcgov_req()", 
+  #        call. = FALSE)
+  # }
   
   ## Add the necessary R files and directories
   done("Creating new project")
@@ -89,11 +98,13 @@ create_bcgov_project <- function(path = ".", rmarkdown = TRUE,
                                   "apache2" = insert_bcgov_apache_header,
                                   "cc-by" = insert_bcgov_cc_header)
   lapply(files, insert_licence_header)
-
+  
   if (default_str) {
     cat('source("01_load.R")\nsource("02_clean.R")\nsource("03_analysis.R")\nsource("04_output.R")\n', 
         file = file.path(path_norm, "run_all.R"))
   }
+  
+
   
   if (open) open_project(path)
 }
