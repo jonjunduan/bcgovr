@@ -35,3 +35,4 @@ usethis::use_github(remote = "origin")
 # git rm -rf .
 # git commit --allow-empty -m "Initialize gh-pages branch"
 # git push origin gh-pages
+pkgdown::build_site()
