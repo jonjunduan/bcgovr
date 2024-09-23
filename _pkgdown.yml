@@ -1,4 +1,56 @@
-url: ~
+development:
+  mode: auto
+
+url: https://bcgov.github.io/bcdata
+
 template:
   bootstrap: 5
+  bslib:
+    base_font: "BCSans"
+    code_font: {google: "Fira Mono"}
+
+code:
+  width: 60
+
+reference:
+  - title: "Interacting with the B.C. Data Catalogue"
+    desc: >
+      Functions to search, browse, list, and explore records and their
+      resources (data sets) in the B.C. Data Catalogue
+    contents:
+      - '`bcdc_browse`'
+      - '`bcdc_search`'
+      - '`bcdc_search_facets`'
+      - '`bcdc_list`'
+      - '`bcdc_get_record`'
+      - '`bcdc_tidy_resources`'
+      - '`bcdc_list_groups`'
+      - '`bcdc_list_group_records`'
+      - '`bcdc_list_organizations`'
+      - '`bcdc_list_organization_records`'
+      - '`bcdc_get_citation`'
+  - title: "Direct downloads of data sets"
+    desc: >
+      Directly download (or preview) data sets (resources) from the
+      B.C. Data Catalogue
+    contents:
+      - '`bcdc_get_data`'
+      - '`bcdc_preview`'
+      - '`bcdc_read_functions`'
+  - title: "Querying data from a Web Feature Service catalogue record"
+    desc: >
+      Issue queries using `select` and `filter` verbs against data sets in the
+      B.C. Data Catalogue that have a Web Feature Service.
+    contents:
+      - '`bcdc_query_geodata`'
+      - '`bcdc_describe_feature`'
+      - '`filter.bcdc_promise`'
+      - '`select.bcdc_promise`'
+      - '`mutate.bcdc_promise`'
+      - '`collect.bcdc_promise`'
+      - '`cql_geom_predicates`'
+      - '`bcdc_check_geom_size`'
+      - '`CQL`'
+      - '`bcdc_options`'
+
 
