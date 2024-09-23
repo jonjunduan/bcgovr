@@ -1,15 +1,12 @@
 development:
   mode: auto
 
-url: https://jonjunduan.github.io/bcgovr
-
 template:
   bootstrap: 5
   bslib:
     base_font: "BCSans"
     code_font: {google: "Fira Mono"}
 
-code:
-  width: 60
+
 
 
